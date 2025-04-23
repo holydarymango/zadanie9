@@ -1,0 +1,285 @@
+﻿<Window x:Class="Proect_9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proect_9"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        FontFamily="Consolas"
+        Height="500" 
+        Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Image Source="/Images/бандрюд.jpg"
+               Grid.RowSpan="3"
+               Stretch="UniformToFill"/>
+        <Label FontSize="18" 
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="0"
+               Content="Практическая работа №9 "
+               FontWeight="Bold"
+               Foreground="white" Height="35" Width="240"/>
+        <DataGrid x:Name="ProductDG"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserSortColumns="False"
+                  Background="white"
+                  RowBackground="White"
+                  AlternatingRowBackground="black"
+                  GridLinesVisibility="Horizontal"
+                  ColumnHeaderHeight="50"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeRows="False"
+                  Effect="{StaticResource MaterialDesignElevationShadow16}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="Auto"
+                                    Header="№"
+                                    Binding="{Binding ProductID}"/>
+                <DataGridTextColumn Width="Auto"
+                                    Header="Название товара"
+                                    Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Width="Auto"
+                                    Header="Описание товара"
+                                    Binding="{Binding ProductDescription}"/>
+                <DataGridTextColumn Width="Auto"
+                                    Header="Цена товара"
+                                    Binding="{Binding ProductPrice}"/>
+                <DataGridTextColumn Width="Auto"
+                                    Header="Колв-во товара"
+                                    Binding="{Binding ProductUnil}"/>
+                <DataGridTemplateColumn Header="Редактировать товар">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnSelectedProductToEdit"
+                                    Click="BtnSelectedProductToEdit_Click"
+                                    Foreground="black">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="EventEdit" 
+                                                             Margin="0 2 3 0"/>
+                                    <TextBlock Text="Редактировать"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Удалить товар">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnDeleteProduct"
+                                    Click="BtnDeleteProduct_Click"
+                                    Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Remove" 
+                                                             Margin="0 0 3 0"/>
+                                    <TextBlock Text="Удалить"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row=" 2 ">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Margin="5"
+                    Background="white"
+                    BorderBrush="black"
+                    BorderThickness="1">
+                <StackPanel Margin="5">
+                    <Label Content="Добавить новый товар"
+                           FontWeight="Bold"
+                           Foreground="black" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           Margin="5"/>
+
+                    <Grid Name="NewProductGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="Название товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="1" 
+                                 Text="{Binding ProductName}"
+                                 Foreground="black"
+                                 TextWrapping="Wrap"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Описание товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="1" 
+                                 Text="{Binding ProductDescription}"
+                                 Foreground="black"
+                                 TextWrapping="Wrap"/>
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="Цена товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="1" 
+                                 Text="{Binding ProductPrice}"
+                                 Foreground="black"/>
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Content="Кол-во товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="3"
+                                 Grid.Column="1" 
+                                 Text="{Binding ProductUnit}"
+                                 Foreground="black"/>
+
+                        <Button Grid.Row="4"
+                                Grid.ColumnSpan="2"
+                                Width="150"
+                                Margin="20"
+                                FontWeight="Bold"
+                                x:Name="BtnAddItem"
+                                BorderBrush="black"
+                                Click="BtnAddItem_Click"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="black"
+                                Foreground="White"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonProgressAssist.Value="-1"
+                                materialDesign:ButtonProgressAssist.IndicatorForeground="White"
+                                materialDesign:ButtonProgressAssist.IndicatorBackground="black"
+                                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="DatabaseAdd"
+                                                         
+                                                         Margin="0 2 3 0"/>
+                                <TextBlock Text="Добавить"/>
+                                
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1"
+                    Margin="5"
+                    BorderThickness="1"
+                    Background="White"
+                    BorderBrush="black">
+                <StackPanel Margin="5">
+                    <Label Content="Редактировать товар"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                           Foreground="black"/>
+
+                    <Grid Name="UpdateProductGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="Название товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="1"
+                                 Text="{Binding ProductName}"
+                                 Foreground="black"
+                                 TextWrapping="Wrap"/>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Описание товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="2"
+                                 Text="{Binding ProductDescription}"
+                                 Foreground="black"
+                                 TextWrapping="Wrap"/>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="Цена товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="3"
+                                 Text="{Binding ProductPrice}"
+                                 Foreground="black"/>
+
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Content="Кол-во товара"
+                               Foreground="black"/>
+                        <TextBox Grid.Row="3"
+                                 Grid.Column="4"
+                                 Text="{Binding ProductUnit}"
+                                 Foreground="black"/>
+
+                        <Button Grid.Row="4"
+                                Grid.ColumnSpan="2"
+                                Width="150"
+                                x:Name="BtnEditItem"
+                                Click="BtnEditItem_Click"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="black"
+                                Foreground="White"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                materialDesign:ButtonProgressAssist.IndicatorForeground="White"
+                                materialDesign:ButtonProgressAssist.Value="-1"
+                                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                IsEnabled="{Binding DataContext.ControlsEnabled,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="EventEdit"
+                                                         Margin="0 2 3 0"/>
+                                <TextBlock Text="Редактировать"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
