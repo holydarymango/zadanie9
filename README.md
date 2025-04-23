@@ -8,12 +8,13 @@
 # Скриншоты
 
 1. Главное окно:
-
+ ![](https://github.com/holydarymango/zadanie9/blob/master/scrin/prak9%201.png)
 
 2. Окно добавления:
-
+ ![](https://github.com/holydarymango/zadanie9/blob/master/scrin/prak9%202.png)
 
 3. Окно редактирования:
+ ![](https://github.com/holydarymango/zadanie9/blob/master/scrin/prak9%203.png)
 
 # Установка
 1. Клонируйте репозиторий:
